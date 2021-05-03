@@ -12,25 +12,8 @@ class App extends Component {
   render(){
     return (
       <View style={styles.container}>
-        {/* <AddEntry /> */}
-        <TouchableOpacity
-          onPress={this.handlePress}
-          underlayColor='#d427'
-          style={styles.btn}
-        >
-          <Text style={styles.btnText}> Touchable highlight </Text>
+        <AddEntry />
 
-        </TouchableOpacity>
-        
-          <View style={styles.btn}>
-              <TouchableWithoutFeedback
-              onPress={this.handlePress}
-            >
-              <Text style={styles.btnText}> Without Feedback</Text>
-            </TouchableWithoutFeedback>
-          </View>
-
-       
       </View>
     );
   }
@@ -39,10 +22,10 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor:'orange',
+    color:'black'
   },
   btn:{
     backgroundColor:'orange',
