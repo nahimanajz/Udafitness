@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { FonteAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FonteAwesome, MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import { white } from './colors';
 export function isBetween (num, x, y) {
     if (num >= x && num <= y) {
@@ -52,19 +52,11 @@ export function isBetween (num, x, y) {
             unit: 'miles',
             step: 1,
             type: 'steppers',
-            getIcon(){
-                return (
-                    <View>
-                        <MaterialIcons 
-                            name="directions-run"
-                            color={'black'}
-                            size={35}
-                        >
-
-                        </MaterialIcons>
-                    </View>
-                )
-            }
+            getIcon :() =>(<MaterialIcons 
+                              name="directions-run"
+                              color={'black'}
+                              size={35}
+                />)
 
           },
           bike: {
@@ -73,19 +65,15 @@ export function isBetween (num, x, y) {
             unit: 'meters',
             step: 100,
             type: 'steppers',
-            getIcon(){
-                return (
-                    <View>
+            getIcon:()=> (
                         <MaterialCommunityIcons 
                             name="bike"
                             color={'black'}
                             size={35}
-                        >
+                        />
 
-                        </MaterialCommunityIcons>
-                    </View>
+                   
                 )
-            }
           },
           swim: {
             displayName: 'Swim',
@@ -93,41 +81,43 @@ export function isBetween (num, x, y) {
             unit: 'meters',
             step: 100,
             type: 'steppers',
-            getIcon(){
-                return (
-                    <View>
-                        <MaterialCommunityIcons 
+            getIcon:()=>(<MaterialCommunityIcons 
                             name="swim"
                             color={'black'}
                             size={35}
-                        >
-
-                        </MaterialCommunityIcons>
-                    </View>
-                )
-            }
+                        />
+                      )
+            
           },
-          sleep: {
+          eat: {
             displayName: 'Eat',
             max:10,
             unit: 'rating',
             step: 1,
             type: 'slider',
-            getIcon(){
-                return (
-                    <View>
-                        <MaterialIcons 
+            getIcon:()=>(
+                       <MaterialCommunityIcons 
                             name="food"
                             color={'black'}
                             size={35}
-                        >
-
-                        </MaterialIcons>
-                    </View>
+                         />
                 )
-            }
+            
           },
-          eat: {}
+          sleep: {
+            displayName: 'Sleep',
+            max: 24,
+            unit: 'hours',
+            step: 1,
+            type: 'slider',
+            getIcon:() => (
+                  <FontAwesome
+                    name='bed'
+                    color={'black'}
+                    size={30}
+                  />
+              )
+            }
       }
-      return typeof metric === 'undefined'? info: info[metric];
+      return (typeof metric === 'undefined')? info: info[metric];
   }
