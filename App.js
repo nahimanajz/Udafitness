@@ -1,21 +1,27 @@
+import React, { Component} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+class App extends Component {
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text> Text</Text>
+        <Ionicons name="ios-pizza" size={128} color="red" />
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'orange',
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
+export default App;
