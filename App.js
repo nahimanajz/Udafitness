@@ -4,6 +4,9 @@ import { StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, View } f
 import AddEntry from './components/AddEntry'
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 class App extends Component {
+  state ={
+    value:0
+  }
  
   handlePress = () => {
     alert('Hi Janvier, it\'s Sophia')
@@ -13,7 +16,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <AddEntry />
-
+     
       </View>
     );
   }
@@ -22,9 +25,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'orange',
     color:'black'
   },
   btn:{

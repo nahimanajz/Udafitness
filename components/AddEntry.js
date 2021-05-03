@@ -2,7 +2,7 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import React from 'react'
 import { Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { getMetricMetaInfo} from '../utils/helpers';
+import { getMetricMetaInfo, timeToString} from '../utils/helpers';
 import DateHeader from './DateHeader';
 import UdaciSlider from './UdaSlider';
 import UdaciStepper from './UdaStepper';
@@ -78,13 +78,12 @@ export default class AddEntry extends React.Component {
                     const value = this.state[key]
                    return(
                        <View key={key}>
-
                             {getIcon()}
                             {
                                 type === 'slider'?
                                 <UdaciSlider
                                     value={value}
-                                    onChange={()=>this.slide(key, value)}
+                                    onChange={(value)=> this.slide(key, value)}
                                      {...rest}
 
                                 />
