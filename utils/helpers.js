@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FonteAwesome, MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-import { white } from './colors';
+import * as color from './colors';
 export function isBetween (num, x, y) {
     if (num >= x && num <= y) {
       return true
@@ -9,7 +9,16 @@ export function isBetween (num, x, y) {
   
     return false
   }
-  
+  const styles = StyleSheet.create({
+    iconContainer:{padding: 5,
+    borderRadius:8,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20
+    }
+  })
   export function calculateDirection (heading) {
     let direction = ''
   
@@ -52,11 +61,14 @@ export function isBetween (num, x, y) {
             unit: 'miles',
             step: 1,
             type: 'steppers',
-            getIcon :() =>(<MaterialIcons 
-                              name="directions-run"
-                              color={'black'}
-                              size={35}
-                />)
+            getIcon :() =>(
+              <View style={[styles.iconContainer, {backgroundColor:color.red}]}>
+                    <MaterialIcons
+                      name="directions-run"
+                      color={'white'}
+                      size={35} />
+              </View>
+              )
 
           },
           bike: {
@@ -66,11 +78,13 @@ export function isBetween (num, x, y) {
             step: 100,
             type: 'steppers',
             getIcon:()=> (
+                     <View style={[styles.iconContainer, {backgroundColor:color.orange}]}>
                         <MaterialCommunityIcons 
                             name="bike"
-                            color={'black'}
+                            color={'white'}
                             size={35}
                         />
+                      </View>
 
                    
                 )
@@ -81,11 +95,14 @@ export function isBetween (num, x, y) {
             unit: 'meters',
             step: 100,
             type: 'steppers',
-            getIcon:()=>(<MaterialCommunityIcons 
+            getIcon:()=>(
+                  <View style={[styles.iconContainer, {backgroundColor:color.blue}]}>
+                      <MaterialCommunityIcons 
                             name="swim"
-                            color={'black'}
+                            color={'white'}
                             size={35}
                         />
+                  </View>
                       )
             
           },
@@ -96,11 +113,13 @@ export function isBetween (num, x, y) {
             step: 1,
             type: 'slider',
             getIcon:()=>(
+                  <View style={[styles.iconContainer, {backgroundColor:color.pink}]}>
                        <MaterialCommunityIcons 
                             name="food"
-                            color={'black'}
+                            color={'white'}
                             size={35}
                          />
+                  </View>
                 )
             
           },
@@ -111,13 +130,21 @@ export function isBetween (num, x, y) {
             step: 1,
             type: 'slider',
             getIcon:() => (
+               <View style={[ styles.iconContainer, { backgroundColor:color.purple }]}>
                   <FontAwesome
                     name='bed'
-                    color={'black'}
+                    color={'white'}
                     size={30}
                   />
+                </View>
               )
             }
       }
       return (typeof metric === 'undefined')? info: info[metric];
   }
+  export function getDailyReminderValue(){
+    return {
+      today: "👋🏿 Don't forget to log your data today !"
+    }
+  }
+  
