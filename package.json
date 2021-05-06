@@ -2,12 +2,13 @@
   "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
-    "ios": "ls",
+    "ios": "expo start run-ios",
     "web": "expo start --web",
     "start": "react-native start"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.4",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/slider": "^3.0.3",
     "expo": "~41.0.1",
     "expo-splash-screen": "~0.10.2",

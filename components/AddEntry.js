@@ -92,7 +92,7 @@ class AddEntry extends Component {
         const metaInfo = getMetricMetaInfo();
         if(this.props.isAlreadyLogged){
             return (
-                <View styles={styles.center}>
+                <View style={styles.center}>
                     <Ionicons name={Platform.OS === 'ios'?"ios-happy-outline":"md-happy"} size={100}/>
                     <Text> You already logged your information Today </Text>
                     <TextButton style={{padding: 10}} onPress={this.reset}> Reset</TextButton>
@@ -107,7 +107,7 @@ class AddEntry extends Component {
                     const { getIcon, type, ...rest } = metaInfo[key]
                     const value = this.state[key]
                    return(
-                       <View key={key}>
+                       <View key={key} style={styles.row}>
                             {getIcon()}
                             {
                                 type === 'slider'?
@@ -137,9 +137,9 @@ class AddEntry extends Component {
     }
 }
 const styles = StyleSheet.create({
-    cotainer:{
+    container:{
         flex: 1,
-        padding: 20,
+        padding: 50,
         backgroundColor:color.white
     },
     row:{
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
         marginRight: 30,
         marginLeft:30
     }
+    
 })
 const mapStateToProps = (state) => {
     const key = timeToString()
