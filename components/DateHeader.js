@@ -1,6 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text } from 'react-native'
 import { purple } from '../utils/colors'
-export default DateHeader =({date})=>(
-<Text style={{fontSize: 25, color: purple}}> {date} </Text>
-) 
+import moment from 'moment'
+
+export default DateHeader =({date})=>{
+    const convertedDate = date && (JSON.stringify(date).substring(1, 11))
+return(
+        <Text style={{fontSize: 25, color: purple}}> {moment(convertedDate).format('MMMM Do YYYY')} </Text>
+)
+}
+ 

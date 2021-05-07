@@ -10,13 +10,14 @@ export function isBetween (num, x, y) {
     return false
   }
   const styles = StyleSheet.create({
-    iconContainer:{padding: 5,
-    borderRadius:8,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 20
+    iconContainer:{
+      padding: 5,
+      borderRadius:8,
+      width: 50,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: 20
     }
   })
   export function calculateDirection (heading) {
@@ -142,9 +143,8 @@ export function isBetween (num, x, y) {
       }
       return (typeof metric === 'undefined')? info: info[metric];
   }
-  export function getDailyReminderValue(){
-    return {
+  export const getDailyReminderValue=()=>({
       today: "👋🏿 Don't forget to log your data today !"
-    }
-  }
+    })
+  
   
