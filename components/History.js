@@ -10,8 +10,13 @@ import { entries } from '../reducers'
 import { white } from '../utils/colors'
 import DateHeader from './DateHeader'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import MetricCard from './MetricCard'
+import AppLoading from 'expo-app-loading';
 
 class History extends Component {
+    state = {
+        ready: false
+    }
     componentDidMount(){
         const {dispatch} = this.props
         fetchCalendarResults()
@@ -23,7 +28,9 @@ class History extends Component {
                     [timeToString()]: getDailyReminderValue()
                 }))
             }
-        })
+        }).then(()=> this.setState(()=>({
+            ready: true
+        })))
     }
     renderEmptyDate =(formattedDate)=>(
      
@@ -38,22 +45,26 @@ class History extends Component {
         alert(Object.keys(formattedDate))
             return(    <View style={styles.item}>
                     { today ?   <View>
-                                    {/* <DateHeader date={formattedDate} /> */}
+                                    <DateHeader date={formattedDate} />
                                     <Text style={styles.noDataText}> {today}</Text>
                                 </View>
                         : <TouchableOpacity onPress={()=>console.log("pressed")}>
-                                <Text> {JSON.stringify(metrics)}  </Text>
+                            <MetricCard metrics={metrics} date={formattedDate} />
                          </TouchableOpacity>
                     }
                 </View>
              )
         }
     render(){
-        const {entries} = this.props;
-        console.log(JSON.stringify(entries)[0].today)
+        const { entries } = this.props;
+        const { ready } = this.state;
+
+        if(!ready) {
+            return <AppLoading />
+        }
         return(
             <Agenda
-               
+               items={entries}
                 renderItem={this.renderItem}
                 renderEmptyDate={this.renderEmptyDate}
             />
