@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { purple, white } from './utils/colors'
-
+import {StackNavs} from './components/navigations/StackNavs'
 
 function UdaciStatusBar ({backgroundColor, ...props}){
 return (
@@ -54,6 +54,7 @@ const Tabs= () => (
   </Tab.Navigator>
 </NavigationContainer>
 ) 
+
 class App extends Component {
   state ={
     value:0
@@ -65,7 +66,8 @@ class App extends Component {
         <SafeAreaProvider> 
           <View style={{flex: 1}}>
             <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
-            <Tabs />
+            {/* <Tabs /> */}
+            {<StackNavs />}
           </View>
         </SafeAreaProvider>
          
