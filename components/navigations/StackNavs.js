@@ -5,14 +5,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import History from '../History';
 import AddEntry from '../AddEntry';
 import EntryDetail from '../EntryDetails';
-import { orange, purple } from '../../utils/colors';
+import { orange, purple, white } from '../../utils/colors';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 export const  StackNavs = () =>{
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="addEntry"> 
+            <Stack.Navigator initialRouteName="addEntry" navigationOptions={{
+                headerTintColor: purple,
+                headerStyle:{
+                    backgroundColor:orange
+                }
+            }}> 
                 <Stack.Screen name="history" component={History} /> 
                 <Stack.Screen name="addEntry" component={AddEntry} options={{
                     title:'ADD Entry'                
