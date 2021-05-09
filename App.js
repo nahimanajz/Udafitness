@@ -66,8 +66,8 @@ class App extends Component {
         <SafeAreaProvider> 
           <View style={{flex: 1}}>
             <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
-            {/* <Tabs /> */}
-            <StackNavs />
+            <Tabs />
+            {/* <StackNavs /> */}
           </View>
         </SafeAreaProvider>
          
