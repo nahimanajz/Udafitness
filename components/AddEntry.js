@@ -1,4 +1,4 @@
-import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons} from '@expo/vector-icons';
 import React,{ Component}from 'react'
 import { Text, View,StyleSheet,Platform } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'

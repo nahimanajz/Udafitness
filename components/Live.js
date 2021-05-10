@@ -1,14 +1,43 @@
 import React, { Component } from "react"
 import { ActivityIndicator,TouchableOpacity,StyleSheet, View, Text } from "react-native"
 import { Foundation } from "@expo/vector-icons"
-import { purple, white} from "../utils/colors"
-import { back } from "react-native/Libraries/Animated/src/Easing"
+import { orange, purple, white} from "../utils/colors"
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location'
+import { calculateDirection } from '../utils/helpers'
 
 export default class Live extends Component {
     state = {
         coords: null,
-        status: 'undetermined',
+        status: 'granted',
         direction: ''
+    }
+    async componentDidMount(){
+       await Permissions.getAsync(Permissions.LOCATION).then(({status}) =>{
+            if(status === 'granted'){
+                return this.setLocation()
+            }
+            this.setState(()=>({status}))
+
+        }).catch(error =>{
+            console.warn(`Erro getting location permissions${error}`)
+            this.setState(()=>({status: 'undetermined'}))
+        })
+    }
+     setLocation(){
+         Location.watchPositionAsync({
+            enableHighAccuracy: true,
+            timeInterval:1,
+            distanceInterval:1,
+        },({coords})=>{
+            const newDirection = calculateDirection(coords.heading)
+            const { direction } = this.state
+            this.setState(()=>({
+                coords,
+                status: 'grated',
+                direction: newDirection
+            }))
+        })
     }
     askPermission(){
         //
@@ -37,6 +66,25 @@ export default class Live extends Component {
                 </View>
             )
         }
+        return (
+            <View style={styles.container}>
+                <View style={styles.directionContainer}>
+                    <Text style={styles.header}>You're heading </Text>
+                    <Text style={styles.direction}>North </Text>
+                </View>
+                <View style={styles.metricContainer}>
+                    <View style={styles.metric}>
+                        <Text style={[ styles.header, {color:white }]}> Altitude </Text>
+                        <Text style={[ styles.subHeader, {color:white }]}> {200} Feet </Text>
+                    </View>
+                    <View style={styles.metric}>
+                        <Text style={[ styles.header, {color:white }]}> Speed </Text>
+                        <Text style={[ styles.subHeader, {color:white }]}> {300} Mph </Text>
+                    </View>
+                </View>
+                
+            </View>
+        )
     }
 }
 const styles = StyleSheet.create({
@@ -56,5 +104,41 @@ const styles = StyleSheet.create({
         borderRadius:7
         
     },
-
+    header: {
+        fontSize: 35,
+        textAlign: 'center'
+    },
+    direction: {
+        color:purple,
+        fontSize: 120,
+        textAlign:'center', 
+    },
+    metric: {
+        flex: 1,
+        paddingTop:15,
+        paddingBottom: 15,
+        backgroundColor: 'rgba(255,255,255,0.1)', //glass background
+        marginTop:20,
+        marginBottom: 20,
+        marginLeft:10,
+        marginRight:10
+    },
+    subHeader: {
+        fontSize: 25,
+        textAlign: 'center',
+        marginTop:5
+    },
+    metricContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor:purple
+    },
+    directionContainer:{
+        flex:1,
+        justifyContent: 'center'
+    },
+    container:{
+        flex: 1,
+        justifyContent: 'space-between'
+    }
 })
