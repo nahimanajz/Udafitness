@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { purple, white } from './utils/colors'
 import {StackNavs} from './components/navigations/StackNavs'
+import Live from './components/Live'
 
 function UdaciStatusBar ({backgroundColor, ...props}){
 return (
@@ -49,6 +50,12 @@ const Tabs= () => (
       tabBarLabel: 'Add Entry',
       tabBarIcon: ({color, size})=>(
         <FontAwesome name='plus-square' size={size} color={color} />
+      ),
+    }} />
+    <Tab.Screen name="Live" component={Live} options={{
+      tabBarLabel: 'Live',
+      tabBarIcon: ({color, size})=>(
+        <Ionicons name='ios-speedometer' size={size} color={color} />
       ),
     }} />
   </Tab.Navigator>

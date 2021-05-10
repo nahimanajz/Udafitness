@@ -46,6 +46,7 @@ class AddEntry extends Component {
             sleep: 0,
             eat: 0
         }))
+        this.toHome()
 
         //save to DB;
         submitEntry({key, entry})
@@ -87,6 +88,11 @@ class AddEntry extends Component {
         removeEntry(key)
         //route to home
         //Update "DB"
+    }
+    toHome (){
+        this.props.navigation.dispatch(NavigationAction.back({
+            key: 'AddEntry'
+        }))
     }
     render(){
         const metaInfo = getMetricMetaInfo();
