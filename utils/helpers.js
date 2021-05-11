@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FonteAwesome, MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage'
 import * as color from './colors';
+import * as Permissions from 'expo/permissions';
+const NOTIFICATION_KEY = 'Udafitness:notification';
+
+
 export function isBetween (num, x, y) {
     if (num >= x && num <= y) {
       return true
@@ -146,5 +151,47 @@ export function isBetween (num, x, y) {
   export const getDailyReminderValue=()=>({
       today: "👋🏿 Don't forget to log your data today !"
     })
-  
+  export const clearLocalNotifications =() =>{
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(Notifications.cancelAllScheduledNotificationsAsync)
+  }
+  export const createNotifications =()=>({
+    title: 'Log your stats',
+    body: '👋🏿 log your stats for today',
+    ios:{
+      sound:true
+    },
+    android: {
+      sound: true,
+      priority: 'high',
+      sticky: false,
+      vibrate: true
+    }
+  })
+  export const setLocalNotification =async() =>{
+   await AsyncStorage.getItem(NOTIFICATION_KEY)
+   .then(JSON.parse)
+   .then(data=>{
+     if(data === null){
+        Permissions.askAsync(Permissions.NOTIFICATIONS)
+        .then(({status})=>{
+          if(status === 'granted'){
+            Notifications.cancelAllScheduledNotificationsAsync()
+            let tommorrow = new Date();
+            tommorrow.setDate(tommorrow.getDate() + 1)
+            tommorrow.setHours(20)
+            tommorrow.setMinutes(0)
+
+            Notfications.scheduleLocalNotificationAsync(
+              createNotification(),
+              {
+                time: tommorrow,
+                repeat: 'day'
+              }
+            )
+            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+          }
+        })
+     }
+   })
+  }
   
