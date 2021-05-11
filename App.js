@@ -12,6 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { purple, white } from './utils/colors'
 import {StackNavs} from './components/navigations/StackNavs'
 import Live from './components/Live'
+import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar ({backgroundColor, ...props}){
 return (
@@ -65,6 +66,9 @@ const Tabs= () => (
 class App extends Component {
   state ={
     value:0
+  }
+  componentDidMount(){
+    setLocalNotification()
   }
  
   render(){

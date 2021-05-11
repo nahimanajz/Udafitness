@@ -2,7 +2,13 @@ import { Ionicons} from '@expo/vector-icons';
 import React,{ Component}from 'react'
 import { Text, View,StyleSheet,Platform } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { getMetricMetaInfo, timeToString, getDailyReminderValue} from '../utils/helpers'
+import { 
+     getMetricMetaInfo,
+     timeToString, 
+     getDailyReminderValue,
+     clearLocalNotifications,
+     setLocalNotification
+    } from '../utils/helpers'
 import DateHeader from './DateHeader'
 import TextButton from './TextButton'
 import UdaciSlider from './UdaSlider'
@@ -47,11 +53,10 @@ class AddEntry extends Component {
             eat: 0
         }))
         this.toHome()
-
         //save to DB;
         submitEntry({key, entry})
-
         //clear Notification
+        clearLocalNotifications().then(setLocalNotification)
     }
 
     increment = (metric)=>{

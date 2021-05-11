@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FonteAwesome, MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage'
-import * as color from './colors';
-import * as Permissions from 'expo/permissions';
-const NOTIFICATION_KEY = 'Udafitness:notification';
+import * as color from './colors'
+import * as Permissions from 'expo-permissions'
 
+const NOTIFICATION_KEY = 'Udafitness:notification'
 
 export function isBetween (num, x, y) {
     if (num >= x && num <= y) {
@@ -167,7 +167,7 @@ export function isBetween (num, x, y) {
       vibrate: true
     }
   })
-  export const setLocalNotification =async() =>{
+  export const setLocalNotification = async() =>{
    await AsyncStorage.getItem(NOTIFICATION_KEY)
    .then(JSON.parse)
    .then(data=>{

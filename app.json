@@ -1,12 +1,21 @@
 {
-  "name": "my-app",
-  "displayName": "my-app",
+  "name": "Udafitness",
+  "displayName": "Udafitness",
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "Udafitness",
+    "slug": "Udafitness",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "notification": {
+      "icon": "http://www.student-scholarships.com/images/made/img/featured/nav_basketball_45_45.png"
+    },
+    "ios": {
+     "bundleIdentifier": "org.udacifitness.exp"
+    },
+    "android": {
+     "package": "org.udacifitness.exp"
+    }
   }
 }
